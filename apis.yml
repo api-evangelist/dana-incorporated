@@ -47,6 +47,8 @@ apis:
       - type: Alias
         url: https://raw.githubusercontent.com/api-evangelist/dana/refs/heads/main/apis.yml
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/dana-incorporated
   - type: Website
     url: https://www.dana.com
   - type: Investor Relations
