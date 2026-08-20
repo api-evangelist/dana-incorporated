@@ -50,6 +50,12 @@ apis:
       - Aftermarket
       - Auto Parts
       - Drivetrain
+      - E-Commerce
+      - Supply Chain
+    tags_raw:
+      - Aftermarket
+      - Auto Parts
+      - Drivetrain
       - eCommerce
       - Supply Chain
     properties:
