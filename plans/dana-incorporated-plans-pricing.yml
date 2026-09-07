@@ -3,49 +3,48 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
 provider: Dana Incorporated
 providerId: dana-incorporated
+rewrite_note: >-
+  Rewritten 2026-09-07 by the enrichment pipeline. The previous version of this file was written by
+  the 2026-05-04 bulk sweep (method: generated) and carried a synthesized "Authorized Distributor"
+  plan entry that Dana never published. That entry has been removed; an honest zero replaces it.
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-07'
+generated: '2026-09-07'
+method: searched
+source: >-
+  https://www.dana.com/ (sitemap walked), https://www.danaaftermarket.com/,
+  https://www.dana.com/markets/aftermarket/
+reconciled: true
 tags:
   - Aftermarket
   - Auto Parts
   - Automotive
   - Drivetrain
   - Electrified Propulsion
-description: Dana Incorporated is the corporate entity behind Spicer drivetrain and the Dana aftermarket
-  catalog. The Dana Aftermarket API is a B2B distributor / dealer surface, not a public developer API,
-  and access is provisioned through the distributor agreement. No public price list.
-sources:
-  - https://www.danaincorporated.com/
-notes: Same B2B distributor model as the dana provider entry. No public API pricing.
-plans:
-  - id: dana-incorporated-distributor
-    name: Authorized Distributor / Dealer
-    type: enterprise
-    description: B2B catalog, inventory, and order APIs available to authorized Dana distributors and
-      dealers across drivetrain, aftermarket, and electrified propulsion lines.
-    entries:
-      - label: Distributor agreement
-        description: Access provisioned per distributor contract; no separate API fee
-        name: distributor_agreement
-        type: subscription
-        metric: contract
-        limit: -1
-        timeFrame: year
-        geo: global
-        domains:
-          - https://api.danaaftermarket.com
-        unit: 1
-        price: included with distributor agreement
-        userMultiplied: false
-    elements:
-      - name: Catalog & part lookup
-      - name: Inventory check
-      - name: Order placement
-      - name: Dana Aftermarket API
+description: >-
+  Dana publishes no plans, tiers, or pricing for any API. There is no pricing page, no self-service
+  sign-up that names a price, and no rate card. The corporate site (dana.com) has no commercial API
+  surface at all; the aftermarket ordering platform (danaaftermarket.com) is entirely behind sign-in
+  and its commercial terms sit inside a Dana distributor or dealer agreement negotiated with a sales
+  representative. The 2021 API launch material routed prospective users to a Dana sales
+  representative rather than to a price.
+plan_count: 0
+plans: []
+evidence:
+  - url: https://www.dana.com/sitemap/
+    status: 200
+    note: Full site map walked; no pricing, plans, developer or API page exists.
+  - url: https://www.danaaftermarket.com/
+    status: 200
+    note: Public HTML carries only "/" and "/SignIn"; all commerce is post-authentication.
+  - url: https://www.danaaftermarket.com/MyAccount/CreateAccount
+    status: 200
+    note: Account request form; states no price.
+  - url: https://developer.danaaftermarket.com/
+    status: null
+    note: NXDOMAIN — the portal that would have carried API access terms no longer resolves.
+notes: >-
+  Enterprise / contact-sales only. Recording plan_count 0 is the finding, not a gap in the pass.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

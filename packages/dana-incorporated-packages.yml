@@ -1,0 +1,38 @@
+specification: API Commons Packages
+specificationVersion: '0.1'
+provider: Dana Incorporated
+providerId: dana-incorporated
+generated: '2026-09-07'
+method: searched
+source: >-
+  registry.npmjs.org search, pypi.org, api.github.com org lookup, and the public
+  dana.com / danaaftermarket.com surfaces
+description: >-
+  No first-party Dana Incorporated client library, SDK or CLI was found in any package registry
+  or on any Dana surface. This is a recorded absence, not an unchecked field.
+package_count: 0
+packages: []
+registries_checked:
+  - registry: npm
+    query: 'dana-aftermarket, danaaftermarket, dana-api'
+    result: >-
+      No Dana Incorporated package. The nearest name matches — dana-node, @wiztivi/dana-cli,
+      dana — belong to DANA Indonesia (the e-wallet) and unrelated projects, and are deliberately
+      NOT recorded as Dana Incorporated packages.
+  - registry: pypi
+    query: 'dana-aftermarket, danaaftermarket'
+    result: 404 on both.
+  - registry: github
+    query: 'org lookups for dana, danaincorporated, dana-incorporated, danaaftermarket'
+    result: >-
+      Only github.com/Dana-incorporated exists (created 2021-01-08) and it has no name, no
+      description, no website and zero public repositories. It cannot be attributed to Dana
+      Incorporated on that evidence, so no GitHubOrganization pointer is claimed.
+  - registry: docs
+    query: 'dana.com sitemap walked; danaaftermarket.com public HTML'
+    result: >-
+      No SDK, download, or developer section exists on either site. The developer portal that
+      would have carried them (developer.danaaftermarket.com) no longer resolves.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

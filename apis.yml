@@ -37,16 +37,24 @@ tags:
   - Electrified Propulsion
   - Fortune 500
 created: '2026-03-24'
-modified: '2026-04-28'
+modified: '2026-09-07'
 specificationVersion: '0.23'
 kind: company
 description: >-
-  Dana Incorporated is a global supplier of fully integrated drivetrain and
-  electrified propulsion systems for passenger, commercial, and off-highway
-  vehicles. Dana announced an agreement in 2025 for its Off-Highway business
-  to be acquired by Allison Transmission. Dana's main public API surface is
-  the Dana Aftermarket developer platform; this repository is an alias of the
-  primary "dana" profile.
+  Dana Incorporated (NYSE: DAN) is a global supplier of power-conveyance and energy-management
+  solutions for on-highway vehicles — axles, driveshafts, transmissions, sealing and thermal
+  products, and electrified propulsion including motors, inverters and controllers. Founded in
+  1904 and headquartered in Maumee, Ohio, Dana completed the divestiture of its Off-Highway
+  business effective January 1, 2026 and now operates sixty-six major manufacturing and assembly
+  plants plus seven aftermarket sales and service facilities across 24 countries. Dana's public
+  API surface was the Dana Aftermarket developer platform announced in June 2021 — eight APIs for
+  advanced shipping notification, availability, deep linking, order status, part details, part
+  search by application, place order and pricing. As of 2026-09-07 both that portal
+  (developer.danaaftermarket.com) and its API host (api.danaaftermarket.com) return NXDOMAIN; the
+  only anonymously reachable machine-readable documents Dana serves are the OpenID Connect
+  discovery, OAuth authorization-server metadata and JWKS on www.dana.com, which secure the site's
+  Optimizely CMS rather than a product API. This repository is an alias of the primary "dana"
+  profile.
 apis:
   - aid: dana-incorporated:aftermarket-api
     name: Dana Aftermarket API
@@ -55,7 +63,7 @@ apis:
       aftermarket e-commerce platform with APIs for advanced shipping
       notification, availability, deep linking, order status, part details,
       part search by application, place order, and pricing.
-    humanURL: https://developer.danaaftermarket.com/
+    humanURL: https://www.danaaftermarket.com/
     baseURL: https://api.danaaftermarket.com
     tags:
       - Aftermarket
@@ -70,15 +78,61 @@ apis:
       - eCommerce
       - Supply Chain
     properties:
-      - type: Portal
-        url: https://developer.danaaftermarket.com/
-      - type: Documentation
-        url: https://developer.danaaftermarket.com/
+      - type: Authentication
+        url: authentication/dana-incorporated-authentication.yml
+      - type: Lifecycle
+        url: lifecycle/dana-incorporated-lifecycle.yml
+      - type: RateLimits
+        url: rate-limits/dana-incorporated-rate-limits.yml
+      - type: Plans
+        url: plans/dana-incorporated-plans-pricing.yml
       - type: Alias
         url: https://raw.githubusercontent.com/api-evangelist/dana/refs/heads/main/apis.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/dana-incorporated-agentic-access.yml
+  - type: Portal
+    url: https://developer.danaaftermarket.com/
+  - type: JSONLD
+    url: json-ld/dana-incorporated-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/dana-incorporated-vocabulary.yml
   - type: DomainSecurity
     url: security/dana-incorporated-domain-security.yml
+  - type: WellKnown
+    url: well-known/dana-incorporated-well-known.yml
+  - type: Authentication
+    url: authentication/dana-incorporated-authentication.yml
+  - type: OAuthScopes
+    url: scopes/dana-incorporated-scopes.yml
+  - type: OpenIDConnect
+    url: https://www.dana.com/.well-known/openid-configuration
+  - type: Conformance
+    url: conformance/dana-incorporated-conformance.yml
+  - type: Compliance
+    url: conformance/dana-incorporated-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/dana-incorporated-lifecycle.yml
+  - type: Packages
+    url: packages/dana-incorporated-packages.yml
+  - type: LLMsTxt
+    url: llms/dana-incorporated-llms.txt
+  - type: Plans
+    url: plans/dana-incorporated-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/dana-incorporated-rate-limits.yml
+  - type: FinOps
+    url: finops/dana-incorporated-finops.yml
+  - type: TermsOfService
+    url: https://www.dana.com/terms-of-use/
+  - type: PrivacyPolicy
+    url: https://www.dana.com/privacy-notice/
+  - type: Support
+    url: https://www.dana.com/contact/
+  - type: SignUp
+    url: https://www.danaaftermarket.com/MyAccount/CreateAccount
+  - type: Login
+    url: https://www.danaaftermarket.com/SignIn
   - type: LinkedIn
     url: https://www.linkedin.com/company/dana-incorporated
   - type: Website
@@ -87,12 +141,33 @@ common:
     url: https://www.dana.com/investors/
   - type: Newsroom
     url: https://www.dana.com/newsroom/
-  - type: Aftermarket Portal
-    url: https://developer.danaaftermarket.com/
   - type: Alias
     url: https://raw.githubusercontent.com/api-evangelist/dana/refs/heads/main/apis.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
-x-parent: dana
-x-relationship: product
+
+x-enrichment:
+  date: '2026-09-07'
+  status: minimal
+  artifacts_added: 10
+  pass: local-v3
+x-coverage:
+  state: gated
+  reason: customer-only-docs
+  detail: >-
+    Dana's 2021 aftermarket developer portal at developer.danaaftermarket.com and its API host
+    api.danaaftermarket.com both return authoritative NXDOMAIN, and the only surviving aftermarket
+    surface — www.danaaftermarket.com — puts every page behind a distributor SignIn, so the eight
+    APIs Dana announced are now reachable only under a signed distributor agreement arranged
+    through a sales representative.
+  evidence:
+    - url: https://developer.danaaftermarket.com/
+      status: 0
+    - url: https://api.danaaftermarket.com/
+      status: 0
+    - url: https://www.danaaftermarket.com/SignIn
+      status: 200
+    - url: https://api.dana.com/
+      status: 404
+  checked: '2026-09-07'

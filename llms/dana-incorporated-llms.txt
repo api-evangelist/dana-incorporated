@@ -1,0 +1,86 @@
+# Dana Incorporated
+
+> Dana Incorporated (NYSE: DAN, founded 1904, headquartered in Maumee, Ohio) is a global supplier of
+> power-conveyance and energy-management solutions for on-highway vehicles — axles, driveshafts,
+> transmissions, sealing and thermal products, and electrified propulsion including motors, inverters
+> and controllers. Dana divested its Off-Highway business effective January 1, 2026 and, as of that
+> date, operated sixty-six major manufacturing and assembly plants plus seven aftermarket sales and
+> service facilities.
+
+Generated: 2026-09-07
+Method: generated (Dana publishes no llms.txt on any of its hosts; probes recorded in
+well-known/dana-incorporated-well-known.yml)
+Source: https://raw.githubusercontent.com/api-evangelist/dana-incorporated/refs/heads/main/apis.yml
+
+## Read this first: API status
+
+Dana has no publicly reachable API contract, developer portal, or API reference as of 2026-09-07.
+
+- The Dana Aftermarket developer portal announced on 2021-06-03 at https://developer.danaaftermarket.com/
+  — eight APIs: advanced shipping notification, availability, deep linking, order status, part details,
+  part search by application, place order, pricing — **no longer resolves** (authoritative NXDOMAIN).
+  Last Internet Archive capture: 2025-11-12, and that capture is an empty JavaScript app shell.
+- Its API host https://api.danaaftermarket.com **no longer resolves** either.
+- https://api.dana.com is live and Dana-controlled (an Azure API Management gateway) but answers every
+  anonymous path with the gateway's `{"statusCode":404,"message":"Resource not found"}`. No spec, no
+  portal, no discovery document.
+- https://www.danaaftermarket.com is a live B2B ordering platform entirely behind sign-in. Its public
+  HTML carries no developer or API link.
+
+Do not attempt to call a Dana aftermarket API from a stored base URL; there is nothing there to call.
+Access, if it still exists, runs through a Dana distributor agreement and a Dana sales representative.
+
+## What Dana does publish anonymously
+
+- [OpenID Connect discovery](https://www.dana.com/.well-known/openid-configuration): live (HTTP 200).
+  Optimizely (Episerver) CMS auth for www.dana.com. Issuer https://www.dana.com/. Grants:
+  authorization_code, refresh_token, client_credentials. PKCE S256. Scopes: openid, offline_access,
+  profile, email, roles, epi_content_delivery, epi_content_definitions, epi_forms_api.
+- [OAuth 2.0 authorization server metadata](https://www.dana.com/.well-known/oauth-authorization-server): live (HTTP 200), same document at the RFC 8414 path.
+- [JWKS](https://www.dana.com/.well-known/jwks): live (HTTP 200), RS256 signing key.
+- This is the website CMS surface, not a product API. Client credentials are not self-service.
+
+## Company
+
+- [Dana Incorporated](https://www.dana.com/): corporate site.
+- [Aftermarket market page](https://www.dana.com/markets/aftermarket/): what the aftermarket business covers.
+- [DanaAftermarket.com](https://www.danaaftermarket.com/): B2B ordering platform (sign-in required).
+- [Create a DanaAftermarket account](https://www.danaaftermarket.com/MyAccount/CreateAccount): account request.
+- [Newsroom](https://www.dana.com/newsroom/) and [press releases](https://www.dana.com/newsroom/press-releases/).
+- [Investor relations](https://www.dana.com/investors/) (redirects to danaincorporated.gcs-web.com).
+- [Contact](https://www.dana.com/contact/) · [Locations](https://www.dana.com/contact/locations/) · [Suppliers](https://www.dana.com/suppliers/)
+- [Terms of use](https://www.dana.com/terms-of-use/) · [Privacy notice](https://www.dana.com/privacy-notice/)
+- [Careers](https://www.dana.com/careers/) (redirects to jobs.dana.com)
+
+## Security and compliance
+
+- No security.txt, no responsible-disclosure page, no bug bounty attributable to Dana Incorporated.
+  (The "DANA Bug Bounty Program" on YesWeHack belongs to DANA Indonesia, a different company.)
+- Dana's security program is disclosed in Item 1C of its Form 10-K:
+  [FY2025 10-K, filed 2026-02-27](https://www.sec.gov/Archives/edgar/data/26780/000143774926006076/dan20251231_10k.htm).
+  NIST Cybersecurity Framework with periodic external maturity assessments; ISO 27001 "leveraged",
+  not certified.
+- dana.com: TLS 1.3, HSTS max-age 63072000, SPF and DMARC p=reject, CAA pinned to DigiCert and
+  Let's Encrypt. DNSSEC not enabled. Same for danaaftermarket.com except CAA is Let's Encrypt only.
+
+## Artifacts in this profile
+
+- well-known/dana-incorporated-well-known.yml — every /.well-known/ path probed, per host, with status
+- well-known/dana-incorporated-openid-configuration.json — saved verbatim
+- well-known/dana-incorporated-oauth-authorization-server.json — saved verbatim
+- well-known/dana-incorporated-jwks.json — saved verbatim
+- authentication/dana-incorporated-authentication.yml
+- scopes/dana-incorporated-scopes.yml
+- conformance/dana-incorporated-conformance.yml
+- lifecycle/dana-incorporated-lifecycle.yml
+- security/dana-incorporated-domain-security.yml
+- packages/dana-incorporated-packages.yml — zero first-party SDKs, registries checked
+- plans/dana-incorporated-plans-pricing.yml — zero published plans
+- rate-limits/dana-incorporated-rate-limits.yml — zero published limits
+- finops/dana-incorporated-finops.yml
+
+## Not published
+
+No OpenAPI, AsyncAPI, GraphQL SDL, WSDL, .proto, Postman collection, MCP server, A2A agent card,
+llms.txt, changelog, status page, SLA, deprecation policy, sandbox, SDK, CLI, or public pricing.
+Each of these was probed; the probes and their statuses are recorded in the artifacts above.

@@ -1,0 +1,109 @@
+specification: API Commons Conformance
+specificationVersion: '0.1'
+provider: Dana Incorporated
+providerId: dana-incorporated
+generated: '2026-09-07'
+method: searched
+source: >-
+  https://www.dana.com/.well-known/openid-configuration ;
+  https://www.sec.gov/Archives/edgar/data/26780/000143774926006076/dan20251231_10k.htm (Item 1C, Cybersecurity)
+description: >-
+  Standards conformance asserted only where a Dana-published document states it. Two sources
+  carried real assertions: the OpenID Connect discovery document Dana serves on www.dana.com,
+  and Item 1C (Cybersecurity) of Dana's FY2025 Form 10-K filed with the SEC on 2026-02-27.
+  Everything else was probed and came back absent; absent entries are recorded as
+  conforms: false rather than omitted, so a later pass can tell "checked, nothing there"
+  from "not checked".
+conformance:
+  - id: oidc
+    name: OpenID Connect Discovery 1.0
+    conforms: true
+    evidence: https://www.dana.com/.well-known/openid-configuration
+    note: >-
+      HTTP 200, application/json, carries issuer, authorization_endpoint, token_endpoint,
+      userinfo_endpoint, jwks_uri, response_types_supported and subject_types_supported.
+      Scope of the claim is the Optimizely (Episerver) CMS surface on www.dana.com only.
+  - id: oauth2
+    name: OAuth 2.0 Authorization Server Metadata (RFC 8414)
+    conforms: true
+    evidence: https://www.dana.com/.well-known/oauth-authorization-server
+    note: >-
+      HTTP 200 at the RFC 8414 path; grant_types_supported = authorization_code,
+      refresh_token, client_credentials.
+  - id: pkce
+    name: PKCE (RFC 7636)
+    conforms: true
+    evidence: https://www.dana.com/.well-known/openid-configuration
+    note: code_challenge_methods_supported = ["S256"].
+  - id: jwks
+    name: JSON Web Key Set (RFC 7517)
+    conforms: true
+    evidence: https://www.dana.com/.well-known/jwks
+    note: HTTP 200, RS256 signing key published; saved verbatim to well-known/.
+  - id: nist-csf
+    name: NIST Cybersecurity Framework
+    conforms: true
+    evidence: https://www.sec.gov/Archives/edgar/data/26780/000143774926006076/dan20251231_10k.htm
+    note: >-
+      Item 1C: "Dana's cybersecurity programs utilize the National Institute of Standards and
+      Technology (NIST) Cybersecurity Framework" and Dana "periodically contracts with external
+      auditing firms to assess the maturity of Dana's cybersecurity program against the NIST
+      Cybersecurity Framework." Framework alignment with third-party assessment — not a
+      certification.
+  - id: iso-27001
+    name: ISO/IEC 27001
+    conforms: false
+    evidence: https://www.sec.gov/Archives/edgar/data/26780/000143774926006076/dan20251231_10k.htm
+    note: >-
+      Item 1C says Dana's programs "leverage the International Organization for Standardization
+      (ISO) 27001 standard for information security." Leverage is not certification and Dana
+      publishes no certificate or audit report, so this is recorded as false with the exact
+      wording rather than credited as a cert.
+  - id: aces
+    name: ACES (Aftermarket Catalog Exchange Standard, Auto Care Association)
+    conforms: false
+    evidence: https://www.danaaftermarket.com/
+    note: >-
+      ACES/PIES is the domain standard for North American automotive aftermarket catalog and
+      fitment data and would be the standard signature to look for on a Dana aftermarket
+      contract. No Dana-published document we could fetch declares it: the public
+      danaaftermarket.com surface is entirely behind SignIn, and the developer portal that
+      once documented the eight aftermarket APIs no longer resolves. Recorded as an honest
+      not-found, not as a failure.
+  - id: pies
+    name: PIES (Product Information Exchange Standard, Auto Care Association)
+    conforms: false
+    evidence: https://www.danaaftermarket.com/
+    note: Same as aces — no Dana-published declaration reachable.
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: https://api.dana.com/
+    note: >-
+      api.dana.com returns {"statusCode":404,"message":"Resource not found"} — the stock Azure
+      API Management error envelope, not application/problem+json. No published error contract.
+compliance_program:
+  published: true
+  source: https://www.sec.gov/Archives/edgar/data/26780/000143774926006076/dan20251231_10k.htm
+  summary: >-
+    Dana publishes its enterprise security and compliance program in Item 1C of its annual
+    Form 10-K. Named elements: an Enterprise Cybersecurity Steering Committee (ECSC); board
+    oversight through the Technology & Sustainability Committee; a Senior Director of
+    Cybersecurity and GRC; enterprise, product and manufacturing cybersecurity programs
+    covering security architecture, penetration testing, cyber risk management, incident
+    response, vulnerability management, intelligence, awareness/training and governance;
+    NIST CSF maturity assessments by external auditing firms; supplier cybersecurity review;
+    an Information Security Incident Response Plan; and mandatory annual security training.
+  certifications: []
+  certifications_note: >-
+    No SOC 2, ISO 27001, PCI DSS, HIPAA or FedRAMP certificate is published. ISO 27001 is
+    described as "leveraged", not held.
+  vulnerability_disclosure: none
+  vulnerability_disclosure_note: >-
+    No security.txt on any Dana host, no /security or /responsible-disclosure page on dana.com
+    (both 404), and no bug bounty program attributable to Dana Incorporated. NOTE: a "DANA Bug
+    Bounty Program" exists on YesWeHack but belongs to DANA Indonesia, the e-wallet — a
+    different company. It is deliberately NOT recorded here.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

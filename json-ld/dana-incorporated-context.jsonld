@@ -1,0 +1,23 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.danaaftermarket.com/",
+    "schema": "https://schema.org/",
+    "dana": "https://schema.danaaftermarket.com/",
+    "Part": "schema:Product",
+    "Order": "schema:Order",
+    "partNumber": {"@id": "schema:productID", "@type": "schema:Text"},
+    "description": {"@id": "schema:description", "@type": "schema:Text"},
+    "brand": {"@id": "schema:brand", "@type": "schema:Brand"},
+    "category": {"@id": "schema:category", "@type": "schema:Text"},
+    "make": {"@id": "dana:make", "@type": "schema:Text"},
+    "model": {"@id": "dana:model", "@type": "schema:Text"},
+    "year": {"@id": "dana:vehicleYear", "@type": "schema:Text"},
+    "orderId": {"@id": "schema:orderNumber", "@type": "schema:Text"},
+    "status": {"@id": "schema:orderStatus", "@type": "schema:Text"},
+    "items": {"@id": "schema:orderedItem"},
+    "trackingNumber": {"@id": "schema:trackingNumber", "@type": "schema:Text"},
+    "quantity": {"@id": "schema:orderQuantity", "@type": "schema:Integer"},
+    "shippingAddress": {"@id": "schema:shippingDestination"}
+  }
+}

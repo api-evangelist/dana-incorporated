@@ -1,0 +1,143 @@
+specification: API Commons Well-Known
+specificationVersion: '0.1'
+provider: Dana Incorporated
+providerId: dana-incorporated
+generated: '2026-09-07'
+method: probed
+source: >-
+  Anonymous HTTPS probes of the named /.well-known/ path list on every host this record
+  knows: the registrable domain (dana.com) and www, the aftermarket commerce host
+  (danaaftermarket.com + www), and the live Dana API gateway host (api.dana.com,
+  an Azure API Management endpoint). The two hosts carried in apis.yml as the
+  Dana Aftermarket API humanURL/baseURL — developer.danaaftermarket.com and
+  api.danaaftermarket.com — no longer resolve (authoritative NXDOMAIN from Azure DNS),
+  so they could not be probed; their rows are recorded with status null and a note.
+description: >-
+  www.dana.com serves a real OpenID Connect discovery document, the identical document at
+  the RFC 8414 OAuth authorization-server path, and a live JWKS. All three are emitted by the
+  Optimizely (Episerver) CMS that runs dana.com; the issuer they declare is https://www.dana.com/
+  and every endpoint they name is on Dana's own host, so the documents belong to Dana. They
+  describe the CMS content-delivery and forms API surface, NOT the Dana Aftermarket product API.
+  No security.txt, api-catalog, ai-plugin, agent card, or llms.txt was found on any host.
+hosts:
+  - host: www.dana.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: dana-incorporated-openid-configuration.json
+        content_type: application/json;charset=UTF-8
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: dana-incorporated-oauth-authorization-server.json
+        content_type: application/json;charset=UTF-8
+      - path: /.well-known/jwks
+        status: 200
+        file: dana-incorporated-jwks.json
+        content_type: application/json;charset=UTF-8
+        note: jwks_uri named by the discovery document; fetched and saved verbatim.
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+  - host: dana.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: Apex serves the identical document as www.dana.com; saved once under www.dana.com.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        note: Apex serves the identical document as www.dana.com; saved once under www.dana.com.
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+  - host: www.danaaftermarket.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 200
+        note: >-
+          200 with a zero-byte text/plain body. An empty response is not a document;
+          treated as a miss and no LLMsTxt pointer is claimed from it.
+  - host: danaaftermarket.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 200
+        note: Zero-byte body, same as www; treated as a miss.
+  - host: api.dana.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+    note: >-
+      api.dana.com is a live, Dana-controlled Azure API Management gateway (CNAME
+      apim-danaedsetl.azure-api.net). Every path answers with the APIM gateway JSON
+      {"statusCode":404,"message":"Resource not found"} — the gateway is up but publishes
+      no anonymous discovery document, spec, or developer portal.
+  - host: developer.danaaftermarket.com
+    documents:
+      - path: /.well-known/security.txt
+        status: null
+        note: Host does not resolve (NXDOMAIN, authoritative Azure DNS SOA). Not probeable.
+  - host: api.danaaftermarket.com
+    documents:
+      - path: /.well-known/security.txt
+        status: null
+        note: Host does not resolve (NXDOMAIN, authoritative Azure DNS SOA). Not probeable.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

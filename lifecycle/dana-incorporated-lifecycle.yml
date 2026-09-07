@@ -1,0 +1,92 @@
+specification: API Commons Lifecycle
+specificationVersion: '0.1'
+provider: Dana Incorporated
+providerId: dana-incorporated
+generated: '2026-09-07'
+method: probed
+source: >-
+  DNS + HTTPS probes of developer.danaaftermarket.com, api.danaaftermarket.com, api.dana.com
+  and www.danaaftermarket.com; Internet Archive CDX index for developer.danaaftermarket.com;
+  https://www.aftermarketnews.com/danaaftermarket-com-apis-enhance-customer-connection/ (2021-06-03)
+description: >-
+  The headline lifecycle fact for this record is a retirement we observed rather than one Dana
+  announced: the Dana Aftermarket developer portal and its API host have been withdrawn from DNS.
+  Dana publishes no versioning policy, no deprecation policy, no Sunset/Deprecation header
+  commitment, no SLA and no status page for any API.
+versioning:
+  scheme: unknown
+  current_version: unknown
+  note: No versioning policy is published on any reachable Dana surface.
+deprecation_policy:
+  published: false
+  sunset_header: unknown
+  deprecation_header: unknown
+  note: >-
+    No RFC 8594 Sunset/Deprecation commitment is documented. The aftermarket API surface was
+    withdrawn without any published deprecation notice we could find.
+status_page:
+  published: false
+  url: null
+  note: status.dana.com and status.danaaftermarket.com do not resolve; no status page linked from any Dana site.
+sla:
+  published: false
+  note: No public SLA. The 2021 launch material routes prospective users to a Dana sales representative.
+observed_retirements:
+  - surface: Dana Aftermarket developer portal
+    url: https://developer.danaaftermarket.com/
+    state: withdrawn
+    evidence:
+      - fact: Host does not resolve
+        detail: >-
+          Authoritative NXDOMAIN from the danaaftermarket.com nameservers (ns1-06.azure-dns.com),
+          confirmed against 8.8.8.8 and 1.1.1.1 on 2026-09-07.
+      - fact: Last Internet Archive capture
+        detail: >-
+          2025-11-12 (http://web.archive.org/web/20251112042141/http://developer.danaaftermarket.com/).
+          The captured body is a 618-byte Angular SPA shell titled "Dana Developer Portal" — the
+          reference itself only ever existed after script execution and behind a login.
+      - fact: Announced 2021-06-03
+        detail: >-
+          Dana announced eight active APIs — advanced shipping notification, availability, deep
+          linking, order status, part details, part search by application, place order, and
+          pricing — and directed customers to log in and test them at developer.danaaftermarket.com.
+    withdrawn_between: ['2025-11-12', '2026-09-07']
+  - surface: Dana Aftermarket API host
+    url: https://api.danaaftermarket.com
+    state: withdrawn
+    evidence:
+      - fact: Host does not resolve
+        detail: Authoritative NXDOMAIN, same zone and same probe date as the portal.
+    note: >-
+      This host is still carried as the baseURL of the Dana Aftermarket API entry in apis.yml.
+      It is left in place as the historically correct base rather than replaced with a guess;
+      this record is the honest statement that it is currently unreachable.
+live_surfaces:
+  - surface: Dana API gateway
+    url: https://api.dana.com
+    state: live-but-closed
+    evidence:
+      - fact: CNAME to apim-danaedsetl.azure-api.net
+        detail: >-
+          A Dana-controlled Azure API Management gateway. Every probed path returns the APIM
+          gateway body {"statusCode":404,"message":"Resource not found"} with HTTP 404 — the
+          gateway is running and answering, but exposes no anonymous product, spec, or portal.
+  - surface: DanaAftermarket.com commerce platform
+    url: https://www.danaaftermarket.com/
+    state: live
+    evidence:
+      - fact: HTTP 200
+        detail: >-
+          Live B2B ordering platform. Every function is behind /SignIn; the public HTML carries
+          no developer, API, or documentation link.
+corporate_lifecycle:
+  - event: Off-Highway business divested
+    detail: >-
+      Dana's FY2025 Form 10-K (filed 2026-02-27) reports the Off-Highway business as a
+      discontinued operation and states that, as of January 1, 2026, after the divestiture,
+      Dana operated sixty-six major manufacturing and assembly plants. The apis.yml description
+      still described this as an announced 2025 agreement; updated in this pass.
+    source: https://www.sec.gov/Archives/edgar/data/26780/000143774926006076/dan20251231_10k.htm
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

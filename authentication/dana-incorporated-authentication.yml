@@ -1,0 +1,82 @@
+specification: API Commons Authentication
+specificationVersion: '0.1'
+provider: Dana Incorporated
+providerId: dana-incorporated
+generated: '2026-09-07'
+method: probed
+source: https://www.dana.com/.well-known/openid-configuration
+description: >-
+  Authentication profile assembled from the OpenID Connect discovery document Dana serves at
+  https://www.dana.com/.well-known/openid-configuration (HTTP 200, saved verbatim to
+  well-known/dana-incorporated-openid-configuration.json). This is the ONLY authentication
+  surface Dana publishes anonymously. It secures the Optimizely (Episerver) CMS content-delivery
+  and forms API on www.dana.com — it is NOT the auth surface of the Dana Aftermarket product API,
+  whose 2021 developer portal (developer.danaaftermarket.com) and API host
+  (api.danaaftermarket.com) both return NXDOMAIN as of this probe.
+schemes:
+  - id: dana-cms-oidc
+    type: openIdConnect
+    name: Optimizely (Episerver) OpenID Connect on www.dana.com
+    openIdConnectUrl: https://www.dana.com/.well-known/openid-configuration
+    issuer: https://www.dana.com/
+    authorization_endpoint: https://www.dana.com/api/episerver/connect/authorize
+    token_endpoint: https://www.dana.com/api/episerver/connect/token
+    userinfo_endpoint: https://www.dana.com/api/episerver/connect/userinfo
+    end_session_endpoint: https://www.dana.com/api/episerver/connect/logout
+    jwks_uri: https://www.dana.com/.well-known/jwks
+    grant_types:
+      - authorization_code
+      - refresh_token
+      - client_credentials
+    response_types:
+      - code
+    response_modes:
+      - form_post
+      - fragment
+      - query
+    token_endpoint_auth_methods:
+      - client_secret_basic
+      - client_secret_post
+    pkce:
+      supported: true
+      code_challenge_methods:
+        - S256
+    id_token_signing_alg_values:
+      - RS256
+    subject_types:
+      - public
+    claims:
+      - aud
+      - exp
+      - iat
+      - iss
+      - sub
+      - profile
+      - email
+      - role
+    scopes_ref: scopes/dana-incorporated-scopes.yml
+    notes: >-
+      Client credentials are not self-service — there is no public sign-up that issues a CMS
+      OAuth client. The endpoints are live and anonymously discoverable; issuance is not.
+unpublished:
+  - api: Dana Aftermarket API
+    finding: >-
+      No authentication documentation is reachable. The 2021 press release
+      (aftermarketnews.com, 2021-06-03) says customers "log in and test the various APIs" at
+      developer.danaaftermarket.com; that host no longer resolves and its last Internet
+      Archive capture (2025-11-12) was an empty Angular SPA shell titled "Dana Developer
+      Portal". No auth scheme, key format, or token endpoint for the aftermarket API is
+      published anywhere we could fetch.
+    evidence:
+      - url: https://developer.danaaftermarket.com/
+        status: null
+        note: NXDOMAIN
+      - url: https://api.danaaftermarket.com/
+        status: null
+        note: NXDOMAIN
+      - url: https://api.dana.com/
+        status: 404
+        note: Live Azure APIM gateway; anonymous requests get the gateway 404 JSON only.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

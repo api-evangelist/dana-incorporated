@@ -1,0 +1,38 @@
+name: Dana Aftermarket Vocabulary
+description: >-
+  Shared vocabulary of terms used across Dana's aftermarket e-commerce APIs
+  for parts, availability, pricing, ordering, and shipping.
+terms:
+  - term: Part Number
+    definition: The Dana-assigned identifier for an aftermarket part.
+  - term: Application
+    definition: >-
+      The combination of vehicle year, make, model, and component type used to
+      look up compatible parts.
+  - term: Availability
+    definition: >-
+      Real-time inventory levels for a part across Dana's distribution
+      network.
+  - term: Pricing
+    definition: >-
+      Customer- and quantity-specific pricing for a part, including discounts
+      and surcharges.
+  - term: Order
+    definition: >-
+      A purchase placed through the Dana aftermarket platform with one or more
+      line items and shipping/billing details.
+  - term: Order Status
+    definition: >-
+      The processing state of an order, including received, picking, packed,
+      shipped, and delivered.
+  - term: Advanced Shipping Notification
+    definition: >-
+      A pre-shipment record that includes packing slip, tracking number, and
+      estimated delivery date.
+  - term: Distribution Center
+    definition: >-
+      A Dana warehouse from which parts are shipped to customers.
+  - term: Deep Link
+    definition: >-
+      A signed URL that links partners directly to a Dana aftermarket portal
+      page for a specific part or search result.
